@@ -1,5 +1,5 @@
-import React from 'react'
-import Header from '../Header'
+import React from "react";
+import Header from "../Header";
 
 const NotFound = () => {
   return (
@@ -7,7 +7,7 @@ const NotFound = () => {
       <Header />
       Not Found
     </>
-  )
-}
+  );
+};
 
-export default NotFound
+export default NotFound;
