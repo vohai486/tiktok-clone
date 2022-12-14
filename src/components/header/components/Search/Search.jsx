@@ -3,8 +3,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useClickOutSide from "../../../../hooks/useClickOutSide";
 import useDebounce from "../../../../hooks/useDebounce";
+import searchApi from "../../../../api/searchApi";
 
 import { IconClose, IconLoading, IconSearch, IconTick } from "../../../Icons";
+import { renderAvatarImage } from "../../../../constants/defaultUrlImage";
 const Inputstyled = styled("input")(({ theme }) => ({
   padding: "11px 0 13px",
   background: "transparent",
@@ -198,13 +200,7 @@ const Search = (props) => {
               key={item.id}
               onClick={() => navigate(`/@${item.nickname}`)}
             >
-              <Avatar
-                src={
-                  item.avatar === DEFAULT_URL_IMAGE
-                    ? DEFAULT_AVATAR_IMAGE
-                    : item.avatar
-                }
-              />
+              <Avatar src={renderAvatarImage(item.avatar)} />
               <Box className="item-name">
                 <Typography>
                   {item.nickname}

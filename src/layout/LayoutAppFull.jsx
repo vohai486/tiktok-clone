@@ -1,6 +1,6 @@
 import { Box, styled } from "@mui/material";
 import React from "react";
-import Header from "../components/Header";
+import Header from "../components/header";
 import Sidebar from "../components/sidebar";
 
 const BoxStyled = styled(Box)({

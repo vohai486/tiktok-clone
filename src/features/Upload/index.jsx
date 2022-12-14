@@ -1,6 +1,6 @@
-import React from 'react'
-import Header from '../../components/Header'
-import UploadPage from './pages/UploadPage'
+import React from "react";
+import Header from "../../components/header";
+import UploadPage from "./pages/UploadPage";
 
 const UploadFeature = () => {
   return (
@@ -8,7 +8,7 @@ const UploadFeature = () => {
       <Header type="big" />
       <UploadPage></UploadPage>
     </>
-  )
-}
+  );
+};
 
-export default UploadFeature
+export default UploadFeature;
