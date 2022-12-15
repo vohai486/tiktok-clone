@@ -38,14 +38,7 @@ const userApi = {
     const url = `/api/users/${id}/unfollow`;
     return axiosClient.post(url);
   },
-  likeAVideo(id) {
-    const url = `/api/videos/${id}/like`;
-    return axiosClient.post(url);
-  },
-  unLikeAVideo(id) {
-    const url = `/api/videos/${id}/unlike`;
-    return axiosClient.post(url);
-  },
+
   getFollowingsList(params) {
     const url = "/api/me/followings";
     return axiosClient.get(url, { params });

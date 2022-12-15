@@ -9,7 +9,12 @@ import {
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import {
+  createSearchParams,
+  NavLink,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import {
   IconComment,
   IconMusic,
@@ -112,13 +117,17 @@ const Video = ({ video }) => {
   const isBreakPointDown479 = useMediaQuery(theme.breakpoints.down(479));
   const isBreakPointDown1080 = useMediaQuery(theme.breakpoints.down(1080));
   const isBreakPointDown678 = useMediaQuery(theme.breakpoints.down(678));
+  const navigate = useNavigate();
   return (
     <BoxVideo>
-      <Avatar className="avatar" src={renderAvatarImage(video?.user?.avatar)} />
+      <Avatar
+        onClick={() => navigate(`/@${video?.user?.nickname}`)}
+        className="avatar"
+        src={renderAvatarImage(video?.user?.avatar)}
+      />
       <BoxContent>
         <BoxInfoUser>
           <Box
-            component={NavLink}
             sx={{
               display: "flex",
               gap: "8px",
@@ -134,6 +143,7 @@ const Video = ({ video }) => {
               }}
             ></Avatar>
             <Box
+              onClick={() => navigate(`/@${video?.user?.nickname}`)}
               sx={{
                 display: "flex",
                 gap: "8px",
@@ -311,6 +321,13 @@ const Video = ({ video }) => {
               onClick={() => {
                 if (!isLoggedIn) {
                   setShowModal(true);
+                } else {
+                  navigate({
+                    pathname: `/@${video.user.nickname}/video`,
+                    search: createSearchParams({
+                      q: video?.id,
+                    }).toString(),
+                  });
                 }
               }}
             >

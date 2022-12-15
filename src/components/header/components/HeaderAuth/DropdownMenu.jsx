@@ -146,6 +146,7 @@ const BoxStyled = styled(Box)({
       height: "8px",
       width: "24px",
       display: "block",
+      right: "15px",
     },
     ul: {
       color: "rgba(22, 24, 35, 1)",
