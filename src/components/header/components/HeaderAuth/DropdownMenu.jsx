@@ -8,8 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { renderAvatarImage } from "../../../../constants/defaultUrlImage";
+import { logout } from "../../../../redux/user/userSlice";
 
 import {
   IconBack,
@@ -19,6 +21,7 @@ import {
   IconKeyboard,
   IconLanguague,
   IconLiveBorder,
+  IconLogOut,
   IconMenu,
   IconSetting,
   IconTriangle,
@@ -179,6 +182,7 @@ const DropdownMenu = ({ isLoggedIn, loggedInUser }) => {
   const [historyLogin, setHistoryLogin] = useState([{ data: LIST_MENU_LOGIN }]);
   const currentLogin = historyLogin[historyLogin.length - 1];
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const onClickValue = (value) => console.log(value);
   const onClickSetHistory = (item) => {
     setHistory((history) => [...history, item.children]);
@@ -195,7 +199,6 @@ const DropdownMenu = ({ isLoggedIn, loggedInUser }) => {
           setIsShow(false);
         }, 500)
       }
-      onClick={() => setIsShow(true)}
     >
       <IconButton sx={{ p: 0 }}>
         {isLoggedIn ? (
@@ -208,7 +211,7 @@ const DropdownMenu = ({ isLoggedIn, loggedInUser }) => {
         )}
       </IconButton>
       {isShow ? (
-        <Box onMouseEnter={() => setIsShow(true)} className="popper">
+        <Box className="popper">
           {!isLoggedIn && (
             <>
               <IconTriangle />
@@ -294,6 +297,28 @@ const DropdownMenu = ({ isLoggedIn, loggedInUser }) => {
                       </Box>
                     </MenuItem>
                   ))}
+                <MenuItem
+                  sx={{
+                    borderTop: "1px solid rgba(22, 24, 35, 0.12)",
+                  }}
+                  onClick={() => {
+                    dispatch(logout());
+                    setIsShow(false);
+                    window.location.reload(true);
+                  }}
+                >
+                  <Box
+                    sx={{
+                      svg: {
+                        width: "20px",
+                        height: "20px",
+                      },
+                    }}
+                  >
+                    <IconLogOut />
+                    <span>Log out</span>
+                  </Box>
+                </MenuItem>
               </MenuList>
             </>
           )}

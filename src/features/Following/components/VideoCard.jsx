@@ -15,8 +15,8 @@ const VideoCard = ({ user }) => {
     <Box
       onClick={() => navigate(`/@${user.nickname}`)}
       sx={{
-        width: "226px",
-        height: "302px",
+        width: "100%",
+        maxHeight: "420px",
         borderRadius: "8px",
         overflow: "hidden",
         position: "relative",

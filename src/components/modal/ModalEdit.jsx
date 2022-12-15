@@ -12,10 +12,11 @@ import {
 } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import userApi from "../../api/userApi";
 import { renderAvatarImage, renderName } from "../../constants/defaultUrlImage";
+import { userInfo } from "../../redux/user/userSlice";
 import InputEdit from "../form-controls/InputEdit";
 import TextareaEdit from "../form-controls/TextareaEdit.jsx";
 import { IconWrite } from "../Icons";
@@ -135,6 +136,7 @@ const ModalEdit = ({ open, setOpen, getUser }) => {
   const inputRef = useRef(null);
   const [image, setImage] = useState("");
   const [fileImage, setFileImage] = useState("");
+  const ditpatch = useDispatch();
   const schema = yup
     .object({
       username: yup
@@ -161,17 +163,15 @@ const ModalEdit = ({ open, setOpen, getUser }) => {
   });
 
   const handleEidt = async (values) => {
-    console.log(image);
     try {
       const res = await userApi.updateCurrentUser(
         values.first_name,
         values.last_name,
         values.bio,
-        image || ""
+        fileImage || ""
       );
       getUser(user.nickname, true);
       setOpen(false);
-      console.log(res);
     } catch (error) {}
   };
 
@@ -203,10 +203,9 @@ const ModalEdit = ({ open, setOpen, getUser }) => {
             <BoxAvatar onClick={() => inputRef.current.click()}>
               <input
                 onChange={(e) => {
-                  console.log(e.target.src);
-                  console.log(e.target.files[0].name);
+                  console.log(e.target.files[0]);
 
-                  setImage(e.target.files[0].name);
+                  setImage(e.target.files[0]);
                   setFileImage(e.target.files[0]);
                 }}
                 name="avatar"

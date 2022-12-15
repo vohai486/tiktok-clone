@@ -141,8 +141,10 @@ const Video = ({ video }) => {
                   display: "none",
                 },
               }}
+              onClick={() => navigate(`/@${video?.user?.nickname}`)}
             ></Avatar>
             <Box
+              className="pointer"
               onClick={() => navigate(`/@${video?.user?.nickname}`)}
               sx={{
                 display: "flex",

@@ -1,15 +1,23 @@
 import { EmojiFlags } from "@mui/icons-material";
 import { Box, IconButton, styled } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { IconCloseRounded, IconTikTok } from "../../../../components/Icons";
-const BoxWrapper = styled(Box)({
+import {
+  IconCloseRounded,
+  IconComment,
+  IconTikTok,
+} from "../../../../components/Icons";
+const BoxWrapper = styled(Box)(({ theme }) => ({
   width: "896px",
   background: "rgb(0, 0, 0)",
   flex: 1,
+  padding: "0 80px",
   position: "relative",
   overflow: "hidden",
-});
+  [theme.breakpoints.down(896)]: {
+    padding: 0,
+  },
+}));
 const BoxContent = styled(Box)({
   position: "relative",
   width: "100%",
@@ -39,10 +47,12 @@ const ButtonClose = styled(IconButton)({
     background: "rgba(255, 255, 255, 0.3)",
   },
 });
+
 const ButtonLogo = styled(IconButton)({
   position: "absolute",
   top: "20px",
   left: "84px",
+  padding: 0,
   svg: {
     borderRadius: "50%",
   },
@@ -99,6 +109,7 @@ const BoxVideo = ({ video }) => {
       <ButtonReport>
         <EmojiFlags /> Reports
       </ButtonReport>
+
       {/* {videos?.indexOf(+searchParams?.get("q")) !== 0 && (
           <IconButton
             sx={{

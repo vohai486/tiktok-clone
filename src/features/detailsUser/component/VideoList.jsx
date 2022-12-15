@@ -9,7 +9,7 @@ const VideoList = ({ loading }) => {
   const loggedInUser = useSelector((state) => state.user.current);
   const user = useSelector((state) => state.user.userInfo);
   return (
-    <Box sx={{ width: "100%", minHeight: "490px" }}>
+    <Box sx={{ width: "100%", height: "490px" }}>
       {loading ? (
         <Box
           sx={{

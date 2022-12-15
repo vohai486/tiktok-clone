@@ -7,10 +7,7 @@ import { IconMusic, IconUpload } from "../../../components/Icons";
 import { renderAvatarImage } from "../../../constants/defaultUrlImage";
 import ProgressBar from "./ProgressBar";
 var intervalId;
-// $0.toBlob(blob => {
-//   const file = new File([blob], "image.png");
-//     console.log(file)
-// }); get file canvas
+
 const PreviewVideo = ({ setVideoFile, videoFile }) => {
   const user = useSelector((state) => state.user.current);
   const [showControls, setShowControls] = useState(false);

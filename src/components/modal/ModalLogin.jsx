@@ -26,7 +26,6 @@ import {
 const ModalStyled = styled(DialogContent)(({ theme }) => ({
   width: "483px",
   padding: 0,
-
   paddingTop: "48px",
   fontSize: "15px",
   position: "relative",
@@ -201,7 +200,6 @@ const ModalLogin = ({ open, setOpen }) => {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-
                   fontWeight: 600,
                   cursor: "pointer",
                 }}

@@ -15,7 +15,6 @@ const ButtonFollowing = ({
   useEffect(() => {
     setIsFollowing(isFollow);
   }, [isFollow]);
-
   const { showModal, setShowModal } = useShowModal();
   const loggedInUser = useSelector((state) => state.user.current);
   const isLoggedIn = !!loggedInUser.id;

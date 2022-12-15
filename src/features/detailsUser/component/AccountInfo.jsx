@@ -1,19 +1,34 @@
-import { Box, Button, Skeleton, styled, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Skeleton,
+  styled,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { IconEdit, IconTick } from "../../../components/Icons";
-import { renderAvatarImage } from "../../../constants/defaultUrlImage";
+import {
+  renderAvatarImage,
+  renderName,
+  sliceString,
+} from "../../../constants/defaultUrlImage";
 import { useShowModal } from "../../../context/showModalContext";
 import ButtonFollowing from "../../button/ButtonFollowing";
 const BoxInfo = styled(Box)({
   maxWidth: "624px",
   marginBottom: "20px",
 });
-const BoxName = styled(Box)({
+const BoxName = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: "20px",
   marginBottom: "20px",
-});
+  [theme.breakpoints.down(480)]: {
+    flexDirection: "column",
+  },
+}));
 const BoxFollow = styled(Box)({
   marginBottom: "10px",
   display: "flex",
@@ -33,14 +48,17 @@ const AccountInfo = ({ loading, setOpen }) => {
   const user = useSelector((state) => state.user.userInfo);
   const loggedInUser = useSelector((state) => state.user.current);
   const isLoggedIn = !!loggedInUser.id;
+  const theme = useTheme();
+  const isBreakpointDown480 = useMediaQuery(theme.breakpoints.down(480));
   return (
     <BoxInfo>
       <BoxName>
         <Box
           sx={{
-            width: "116px",
-            height: "116px",
+            width: isBreakpointDown480 ? "80px" : "116px",
+            height: isBreakpointDown480 ? "80px" : "116px",
             borderRadius: "50%",
+            alignSelf: isBreakpointDown480 ? "center" : "unset",
             img: {
               borderRadius: "50%",
               height: "100%",
@@ -53,8 +71,10 @@ const AccountInfo = ({ loading, setOpen }) => {
             <Skeleton
               animation="wave"
               variant="circular"
-              width={116}
-              height={116}
+              sx={{
+                width: isBreakpointDown480 ? "80px" : "116px",
+                height: isBreakpointDown480 ? "80px" : "116px",
+              }}
             />
           ) : (
             <img src={renderAvatarImage(user?.avatar)} alt="" />
@@ -77,8 +97,9 @@ const AccountInfo = ({ loading, setOpen }) => {
               component={"h2"}
               sx={{
                 // lineHeight: "38px",
-                fontSize: "32px",
+                fontSize: isBreakpointDown480 ? "28px" : "32px",
                 fontWeight: "bold",
+
                 svg: {
                   width: "20px",
                   height: "20px",
@@ -92,7 +113,7 @@ const AccountInfo = ({ loading, setOpen }) => {
           <Typography
             component={"h3"}
             sx={{
-              fontSize: "18px",
+              fontSize: isBreakpointDown480 ? "16px" : "18px",
               lineHeight: "25px",
               fontWeight: 500,
               whiteSpace: "nowrap",
@@ -101,14 +122,20 @@ const AccountInfo = ({ loading, setOpen }) => {
           >
             {loading ? (
               <Skeleton animation="wave" />
-            ) : user?.first_name?.length === 0 &&
-              user?.first_name?.length === 0 ? (
-              user?.nickname
             ) : (
-              user?.first_name + " " + user?.last_name
+              renderName(user.first_name, user.last_name, user.nickname)
             )}
           </Typography>
-          {user.id === loggedInUser.id ? (
+          {loading ? (
+            <Skeleton
+              animation="wave"
+              sx={{
+                width: "120px",
+                height: "30px",
+                transform: "unset",
+              }}
+            />
+          ) : user.id === loggedInUser.id ? (
             <Button
               variant="outlined"
               sx={{
@@ -157,7 +184,11 @@ const AccountInfo = ({ loading, setOpen }) => {
       </BoxFollow>
       <Box>
         <Typography>
-          {user?.bio?.length === 0 ? "No bio yet." : user?.bio}
+          {user?.bio?.length === 0
+            ? "No bio yet."
+            : isBreakpointDown480
+            ? sliceString(user?.bio, 27)
+            : user?.bio}
         </Typography>
       </Box>
     </BoxInfo>

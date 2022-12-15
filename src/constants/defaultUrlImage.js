@@ -10,6 +10,7 @@ export const renderName = (first, last, nickname) => {
   return first + " " + last;
 };
 export const sliceString = (string, number) => {
+  if (!string) return;
   if (string.length > number) {
     return string.slice(0, number - 3) + "...";
   } else return string;

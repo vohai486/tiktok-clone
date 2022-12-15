@@ -8,6 +8,10 @@ const videoApi = {
     const url = `/api/videos`;
     return axiosClient.get(url, { params });
   },
+  getUserLikedVideos(id) {
+    const url = `/api/users/${id}/liked-videos`;
+    return axiosClient.get(url);
+  },
   getListVideoComment(id) {
     const url = `/api/videos/${id}/comments`;
     return axiosClient.get(url);
@@ -35,6 +39,23 @@ const videoApi = {
   unLikeComment(id) {
     const url = `/api/comments/${id}/unlike`;
     return axiosClient.post(url);
+  },
+  createVideo(
+    description,
+    upload_file,
+    thumbnail_time,
+    music,
+    viewable,
+    allows
+  ) {
+    const data = new FormData();
+    data.append("description", description);
+    data.append("upload_file", upload_file);
+    data.append("thumbnail_time", thumbnail_time);
+    data.append("music", music);
+    data.append("viewable", viewable);
+    data.append("allows", allows);
+    return axiosClient.post("/api/videos", data);
   },
 };
 export default videoApi;
