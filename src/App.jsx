@@ -3,13 +3,15 @@ import ModalLogin from "./components/modal/ModalLogin";
 import { useShowModal } from "./context/showModalContext";
 import { Outlet } from "react-router-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomeFeature from "./features/home";
 import FollowingFeature from "./features/Following";
-import DetailsFeature from "./features/detailsUser";
-import FeedbackFeautres from "./features/feedback";
 import LiveFeature from "./features/live";
 import UploadFeature from "./features/Upload";
 import NotFound from "./components/NotFound";
+import { lazy } from "react";
+
+const HomeFeature = lazy(() => import("./features/home"));
+const DetailsFeature = lazy(() => import("./features/detailsUser"));
+const FeedbackFeautres = lazy(() => import("./features/feedback"));
 
 function App() {
   const { showModal, setShowModal } = useShowModal();
