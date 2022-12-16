@@ -1,20 +1,17 @@
 import {
   Avatar,
-  Backdrop,
   Box,
   Button,
   Dialog,
   DialogContent,
-  Fade,
   IconButton,
-  Modal,
   Skeleton,
   styled,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import videoApi from "../../../../api/videoApi";
@@ -23,7 +20,6 @@ import {
   IconComment,
   IconDelete,
   IconFacebook,
-  IconHeartRounded,
   IconMenuDot,
   IconMusic,
   IconNextRounded,
@@ -38,6 +34,7 @@ import {
   renderName,
   sliceString,
 } from "../../../../constants/defaultUrlImage";
+import { useShowModal } from "../../../../context/showModalContext";
 import ButtonFollowing from "../../../button/ButtonFollowing";
 import ButtonLikeComment from "../../../button/ButtonLikeComment";
 import ButtonLikeVideo from "../../../button/ButtonLikeVideo";
@@ -90,7 +87,7 @@ const BoxFeature = ({ video, loading }) => {
   const loggedInUserId = loggedInUser.id;
   const [countComment, setCountComment] = useState(0);
   const [listCommentVideo, setListCommentVideo] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showModalDel, setShowModalDel] = useState(false);
   const [idDel, setIdDel] = useState("");
   const [showComment, setShowComment] = useState(
     isBreakpointDown1000 ? false : true
@@ -113,10 +110,10 @@ const BoxFeature = ({ video, loading }) => {
     try {
       const res = await videoApi.deleteComment(id);
       handleGetListComment();
-      setShowModal(false);
+      setShowModalDel(false);
     } catch (err) {}
   };
-
+  console.log(listCommentVideo.length);
   return (
     <>
       {showComment && (
@@ -363,7 +360,7 @@ const BoxFeature = ({ video, loading }) => {
                 >
                   {isBreakpointDown1000
                     ? sliceString(window.location.href, 35)
-                    : sliceString(window.location.href, 59)}
+                    : sliceString(window.location.href, 57)}
                 </Box>
                 <Button
                   onClick={() => {
@@ -524,7 +521,7 @@ const BoxFeature = ({ video, loading }) => {
                           <Box
                             onClick={() => {
                               setIdDel(item.id);
-                              setShowModal(true);
+                              setShowModalDel(true);
                             }}
                             className="overlay"
                             sx={{
@@ -594,7 +591,7 @@ const BoxFeature = ({ video, loading }) => {
             <InputComment handleComment={handleComment} />
           )}
           <Dialog
-            open={showModal}
+            open={showModalDel}
             // onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
@@ -632,14 +629,13 @@ const BoxFeature = ({ video, loading }) => {
               <button
                 onClick={() => {
                   handleDeleteComment(idDel);
-                  console.log(idDel);
                 }}
               >
                 Delete
               </button>
               <button
                 onClick={() => {
-                  setShowModal(false);
+                  setShowModalDel(false);
                 }}
               >
                 Cancel
@@ -652,6 +648,10 @@ const BoxFeature = ({ video, loading }) => {
       {isBreakpointDown1000 && (
         <ButtonComment
           onClick={() => {
+            if (!loggedInUserId) {
+              setShowModal(true);
+              return;
+            }
             setShowComment((prev) => !prev);
           }}
         >

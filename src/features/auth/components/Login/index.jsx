@@ -15,7 +15,6 @@ const Login = ({ handleClose }) => {
       const user = unwrapResult(resultAction);
       handleClose();
       window.location.reload(true);
-      navigate("/");
     } catch (error) {
       toast.error(error.message);
     }
