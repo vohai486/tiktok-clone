@@ -16,10 +16,7 @@ const userApi = {
     const url = `api/users/@${nickname}`;
     return axiosClient.get(url);
   },
-  getCurrentUser() {
-    const url = `/api/auth/me`;
-    return axiosClient.get(url);
-  },
+
   updateCurrentUser(first_name, last_name, bio, avatar) {
     const data = new FormData();
     data.append("first_name", first_name);

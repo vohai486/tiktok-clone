@@ -113,7 +113,6 @@ const BoxFeature = ({ video, loading }) => {
       setShowModalDel(false);
     } catch (err) {}
   };
-  console.log(listCommentVideo.length);
   return (
     <>
       {showComment && (
