@@ -45,7 +45,6 @@ const PreviewVideo = ({ setVideoFile, videoFile }) => {
       videoRef.current.play();
       intervalId = setInterval(() => {
         setCurrentTime(+videoRef.current.currentTime);
-        console.log(+videoRef.current.currentTime);
         if (videoRef.current.currentTime === videoRef.current.duration) {
           setTimeout(() => {
             setCurrentTime(0);

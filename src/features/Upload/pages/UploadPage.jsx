@@ -110,10 +110,12 @@ const UploadPage = () => {
         1,
         "Hello",
         "public",
-        ["comment", "duet", "stitch"]
+        "comment"
       );
       console.log(res);
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <Box

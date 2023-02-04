@@ -54,7 +54,7 @@ const videoApi = {
     data.append("thumbnail_time", thumbnail_time);
     data.append("music", music);
     data.append("viewable", viewable);
-    data.append("allows", allows);
+    data.append("allows[]", allows);
     return axiosClient.post("/api/videos", data);
   },
 };
