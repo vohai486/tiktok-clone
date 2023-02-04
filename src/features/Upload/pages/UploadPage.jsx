@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import videoApi from "../../../api/videoApi";
 import PreviewVideo from "../components/PreviewVideo";
 
@@ -70,7 +71,7 @@ var snapshots = [];
 const UploadPage = () => {
   const [personName, setPersonName] = React.useState("public");
   const [videoFile, setVideoFile] = useState("");
-
+  const [caption, setCaption] = useState("");
   const handleChange = (event) => {
     console.log(event.target.value);
     setPersonName(event.target.value);
@@ -105,14 +106,14 @@ const UploadPage = () => {
     if (!videoFile) return;
     try {
       const res = await videoApi.createVideo(
-        "111",
+        caption,
         videoFile,
         1,
         "Hello",
         "public",
         "comment"
       );
-      console.log(res);
+      toast.success("Video upload success");
     } catch (err) {
       console.log(err);
     }
@@ -203,7 +204,10 @@ const UploadPage = () => {
                   },
                 }}
               >
-                <input></input>
+                <input
+                  value={caption}
+                  onChange={(e) => setCaption(e.target.value)}
+                ></input>
               </Box>
             </Box>
             <Box sx={{ marginTop: "24px" }}>
