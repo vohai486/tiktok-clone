@@ -1,4 +1,10 @@
-import { Box, styled, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  styled,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -83,14 +89,25 @@ const HeaderAuth = () => {
           </Box>
         </Box>
       )}
-
+      {isBreakpointDown480 && (
+        <IconButton
+          onClick={() => {
+            if (!isLoggedIn) {
+              setShowModal(true);
+            } else {
+              navigate("/upload");
+            }
+          }}
+        >
+          <IconAdd />
+        </IconButton>
+      )}
       {!isLoggedIn ? (
         <button className="header-login" onClick={() => setShowModal(true)}>
           Log in
         </button>
       ) : (
         <>
-          <IconMessage></IconMessage>
           <IconNotice></IconNotice>
         </>
       )}

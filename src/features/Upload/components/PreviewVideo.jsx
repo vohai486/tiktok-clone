@@ -54,9 +54,9 @@ const PreviewVideo = ({ setVideoFile, videoFile }) => {
         }
       }, 50);
     }
-    // return () => {
-    //   setPlay(false);
-    // };
+    return () => {
+      intervalId && clearInterval(intervalId);
+    };
   }, [play]);
 
   return videoFile ? (

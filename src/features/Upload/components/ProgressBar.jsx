@@ -17,6 +17,7 @@ const ProgressBar = ({
   currentTime,
   handleChangeProgess,
 }) => {
+  console.log(currentTime);
   return (
     <Box
       sx={{
