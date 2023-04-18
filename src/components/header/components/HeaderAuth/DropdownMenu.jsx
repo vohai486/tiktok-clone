@@ -303,8 +303,8 @@ const DropdownMenu = ({ isLoggedIn, loggedInUser }) => {
                   }}
                   onClick={() => {
                     dispatch(logout());
+                    navigate("/");
                     setIsShow(false);
-                    window.location.reload(true);
                   }}
                 >
                   <Box

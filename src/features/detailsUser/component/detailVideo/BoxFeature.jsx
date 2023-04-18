@@ -39,6 +39,7 @@ import ButtonFollowing from "../../../button/ButtonFollowing";
 import ButtonLikeComment from "../../../button/ButtonLikeComment";
 import ButtonLikeVideo from "../../../button/ButtonLikeVideo";
 import InputComment from "./InputComment";
+import { timeSince } from "../../../../constants/getTime";
 
 const BoxWrapper = styled(Box)(({ theme }) => ({
   maxWidth: "544px",
@@ -178,7 +179,10 @@ const BoxFeature = ({ video, loading }) => {
                       )}
                     </Typography>
                     <Typography component="span">·</Typography>{" "}
-                    <Typography component="span">2ago</Typography>
+                    <Typography component="span">
+                      {timeSince(video.updated_at).value}{" "}
+                      {timeSince(video.updated_at).unit} trước
+                    </Typography>
                   </>
                 )}
               </Box>

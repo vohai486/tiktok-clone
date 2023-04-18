@@ -8,11 +8,14 @@ import {
   styled,
   Switch,
   Typography,
+  useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import videoApi from "../../../api/videoApi";
 import PreviewVideo from "../components/PreviewVideo";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -69,6 +72,9 @@ const IOSSwitch = styled((props) => (
 
 var snapshots = [];
 const UploadPage = () => {
+  const theme = useTheme();
+  const loggedInUser = useSelector((state) => state.user.current);
+  const navigate = useNavigate();
   const [personName, setPersonName] = React.useState("public");
   const [videoFile, setVideoFile] = useState("");
   const [caption, setCaption] = useState("");
@@ -114,6 +120,7 @@ const UploadPage = () => {
         "comment"
       );
       toast.success("Video upload success");
+      navigate(`/@${loggedInUser?.nickname}`);
     } catch (err) {
       console.log(err);
     }
@@ -135,9 +142,20 @@ const UploadPage = () => {
           padding: "40px 56px",
           backgroundColor: "rgb(255, 255, 255)",
           boxShadow: "rgb(0 0 0 / 6%) 0px 2px 8px",
+          [theme.breakpoints.down(1130)]: {
+            textAlign: "center",
+            width: "100%",
+            padding: "1rem",
+          },
         }}
       >
-        <Typography component={"h2"} sx={{ fontSize: "24px", fontWeight: 700 }}>
+        <Typography
+          component={"h2"}
+          sx={{
+            fontSize: "24px",
+            fontWeight: 700,
+          }}
+        >
           Upload Video
         </Typography>
         <Typography
@@ -153,6 +171,10 @@ const UploadPage = () => {
           sx={{
             display: "flex",
             margin: "24px 0 130px",
+            [theme.breakpoints.down(1130)]: {
+              flexDirection: "column",
+              alignItems: "center",
+            },
           }}
         >
           <Box sx={{ marginTop: "24px" }}>
@@ -161,6 +183,10 @@ const UploadPage = () => {
           <Box
             sx={{
               marginLeft: "24px",
+              [theme.breakpoints.down(1130)]: {
+                marginTop: "1rem",
+                marginLeft: 0,
+              },
               flex: 1,
               h2: {
                 fontWeight: 600,
@@ -356,7 +382,14 @@ const UploadPage = () => {
                 marginTop: "24px",
                 display: "flex",
                 gap: "24px",
-                button: { height: "48px", width: "164px", fontWeight: 600 },
+                button: {
+                  height: "48px",
+                  width: "164px",
+                  fontWeight: 600,
+                  [theme.breakpoints.down(500)]: {
+                    width: "100%",
+                  },
+                },
               }}
             >
               <Button

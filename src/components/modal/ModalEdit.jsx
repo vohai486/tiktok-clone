@@ -26,6 +26,15 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const ModalStyled = styled(DialogContent)(({ theme }) => ({
   width: "700px",
   padding: 0,
+  [theme.breakpoints.down(768)]: {
+    width: "500px",
+  },
+  [theme.breakpoints.down(520)]: {
+    width: "400px",
+  },
+  [theme.breakpoints.down(425)]: {
+    width: "350px",
+  },
 }));
 const BoxHeader = styled(Box)(({ theme }) => ({
   padding: "24px 24px 12px",
@@ -42,12 +51,18 @@ const BoxBody = styled(Box)(({ theme }) => ({
     display: "flex",
     borderBottom: "0.5px solid rgba(22, 24, 35, 0.12)",
     gap: "24px",
+    [theme.breakpoints.down(520)]: {
+      flexDirection: "column",
+    },
     fontWeight: 600,
     ".modal-label": {
       width: "120px",
     },
     ".modal-content": {
       width: "360px",
+      [theme.breakpoints.down(520)]: {
+        width: "100%",
+      },
       "textarea, input": {
         width: "100%",
         fontSize: "16px",
@@ -83,6 +98,9 @@ const BoxAvatar = styled(Box)(({ theme }) => ({
     height: "96px",
     marginLeft: "128px",
     position: "unset",
+    [theme.breakpoints.down(520)]: {
+      margin: "auto",
+    },
   },
   ".modal-write": {
     position: "absolute",
@@ -182,6 +200,11 @@ const ModalEdit = ({ open, setOpen, getUser }) => {
       disableEscapeKeyDown={true}
       aria-describedby="alert-dialog-slide-description"
       maxWidth="lg"
+      sx={{
+        ".MuiPaper-root": {
+          margin: 0,
+        },
+      }}
     >
       <ModalStyled>
         <BoxHeader>

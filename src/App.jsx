@@ -8,7 +8,6 @@ import LiveFeature from "./features/live";
 import UploadFeature from "./features/Upload";
 import NotFound from "./components/NotFound";
 import { lazy } from "react";
-
 const HomeFeature = lazy(() => import("./features/home"));
 const DetailsFeature = lazy(() => import("./features/detailsUser"));
 const FeedbackFeautres = lazy(() => import("./features/feedback"));

@@ -25,6 +25,12 @@ import {
 } from "../Icons";
 const ModalStyled = styled(DialogContent)(({ theme }) => ({
   width: "483px",
+  [theme.breakpoints.down(570)]: {
+    width: "400px",
+  },
+  [theme.breakpoints.down(500)]: {
+    width: "350px",
+  },
   padding: 0,
   paddingTop: "48px",
   fontSize: "15px",
@@ -36,7 +42,11 @@ const ModalStyled = styled(DialogContent)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     flex: 1,
-    width: "375px",
+    padding: "0rem 2rem",
+    [theme.breakpoints.down(500)]: {
+      padding: "0rem 1rem",
+    },
+    width: "100%",
     height: "581px",
     margin: "auto",
     overflowY: "overlay",
@@ -160,6 +170,11 @@ const ModalLogin = ({ open, setOpen }) => {
       open={open}
       disableEscapeKeyDown={true}
       aria-describedby="alert-dialog-slide-description"
+      sx={{
+        ".MuiPaper-root": {
+          margin: 0,
+        },
+      }}
     >
       <ModalStyled>
         <Box className="auth-content">

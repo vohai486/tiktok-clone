@@ -14,7 +14,6 @@ const Login = ({ handleClose }) => {
       const resultAction = await dispatch(login(values));
       const user = unwrapResult(resultAction);
       handleClose();
-      window.location.reload(true);
     } catch (error) {
       toast.error(error.message);
     }
